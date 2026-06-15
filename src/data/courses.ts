@@ -1,0 +1,341 @@
+import { Course, AvailableDate } from '../types';
+
+export const COURSES: Course[] = [
+  {
+    id: 'osha-10-ilt',
+    name: 'OSHA 10-Hour Construction Safety',
+    price: 239,
+    language: 'English',
+    duration: '10 hrs over 2 days',
+    expiration: '5 Yrs',
+    delivery: 'ILT',
+    classMin: 10,
+    classMax: 40,
+    description: 'Comprehensive entry-level safety training designed for construction field workers. Covers OSHA standards, hazard recognition, avoidance, abatement, and prevention.',
+    category: 'Safety & OSHA',
+    pilot: true
+  },
+  {
+    id: 'osha-10-elearning',
+    name: 'OSHA 10 Hour Construction eLearning',
+    price: 81,
+    language: 'English',
+    duration: '10 hrs',
+    expiration: '5 Yrs',
+    delivery: 'eLearning',
+    classMin: 1,
+    classMax: 'N/A',
+    description: 'On-demand fully virtual OSHA 10 Construction course. Provides the official DOL OSHA wallet card upon completion.',
+    category: 'Safety & OSHA',
+    pilot: false
+  },
+  {
+    id: 'osha-10-elearning-es',
+    name: 'OSHA 10 Hour Construction eLearning (Spanish)',
+    price: 81,
+    language: 'Spanish',
+    duration: '10 hrs',
+    expiration: '5 Yrs',
+    delivery: 'eLearning',
+    classMin: 1,
+    classMax: 'N/A',
+    description: 'On-demand fully virtual OSHA 10 Construction course in Spanish language.',
+    category: 'Safety & OSHA',
+    pilot: false
+  },
+  {
+    id: 'osha-30-elearning',
+    name: 'OSHA 30 Hour Construction eLearning',
+    price: 172,
+    language: 'English',
+    duration: '30 hrs',
+    expiration: '5 Yrs',
+    delivery: 'eLearning',
+    classMin: 1,
+    classMax: 'N/A',
+    description: 'Comprehensive online safety training for supervisors, safety directors, and crew leads. Deep dive into OSHA compliance and jobsite hazard management.',
+    category: 'Safety & OSHA',
+    pilot: false
+  },
+  {
+    id: 'skid-steer-ilt',
+    name: 'Skid Steer Loader Operator Certification',
+    price: 199,
+    language: 'English',
+    duration: '3 hrs + PE',
+    expiration: '3 Yrs',
+    delivery: 'ILT',
+    classMin: 4,
+    classMax: 10,
+    description: 'Hands-on operator training and practical evaluation (PE) for skid steer equipment. Covers safe pre-operation inspection, maneuvering, and jobsite safety controls.',
+    category: 'Earth Moving',
+    pilot: true
+  },
+  {
+    id: 'skid-steer-elearning',
+    name: 'Skid Steer Loader Operator Certification - eLearning Only',
+    price: 136,
+    language: 'English',
+    duration: '5 hrs (no PE)',
+    expiration: '3 Yrs',
+    delivery: 'eLearning',
+    classMin: 1,
+    classMax: 'N/A',
+    description: 'Online theory training for skid steer operation. Excellent for baseline knowledge, but does not include hands-on practical evaluation.',
+    category: 'Earth Moving',
+    pilot: false
+  },
+  {
+    id: 'rough-terrain-forklift-ilt',
+    name: 'Rough Terrain Forklift Operator Certification',
+    price: 167,
+    language: 'English',
+    duration: '3.5 hrs + PE',
+    expiration: '3 Yrs',
+    delivery: 'ILT',
+    classMin: 5,
+    classMax: 10,
+    description: 'Comprehensive Instructor-Led (ILT) training with hands-on performance evaluation of telehandlers and heavy all-terrain lift equipment on rugged ground.',
+    category: 'Aerial & Lift',
+    pilot: true
+  },
+  {
+    id: 'aerial-lift-bundle-ilt',
+    name: 'Aerial Boomlift & Scissor Lift Operator Certification',
+    price: 239,
+    language: 'English',
+    duration: '4 hrs + PE',
+    expiration: '3 Yrs',
+    delivery: 'ILT',
+    classMin: 5,
+    classMax: 8,
+    description: 'Dual-equipment master operator certification program covering both boomlifts (3b) and scissor lifts (3a) in a single integrated practical hands-on session.',
+    category: 'Aerial & Lift',
+    pilot: true
+  },
+  {
+    id: 'aerial-lift-elearning',
+    name: 'Aerial Boomlift & Scissor Lift Operator Certification - eLearning Only',
+    price: 154,
+    language: 'English',
+    duration: '4.5 hrs (no PE)',
+    expiration: '3 Yrs',
+    delivery: 'eLearning',
+    classMin: 1,
+    classMax: 'N/A',
+    description: 'On-demand theory module covering safety guidelines, standard operating procedures, and hazard identification for boomlifts and scissor lifts.',
+    category: 'Aerial & Lift',
+    pilot: false
+  },
+  {
+    id: 'backhoe-loader-ilt',
+    name: 'Backhoe Loader Operator Certification',
+    price: 199,
+    language: 'English',
+    duration: '8 hrs',
+    expiration: '3 Yrs',
+    delivery: 'ILT',
+    classMin: 4,
+    classMax: 10,
+    description: 'Complete hands-on operator certification for backhoe loaders, focusing on trenching, earth-moving operations, and stabilizer controls.',
+    category: 'Earth Moving',
+    pilot: false
+  },
+  {
+    id: 'basic-rigger-signal-ilt',
+    name: 'Basic Qualified Rigger & Signal Person',
+    price: 343,
+    language: 'English',
+    duration: '8 hrs',
+    expiration: '3 Yrs',
+    delivery: 'ILT',
+    classMin: 10,
+    classMax: 30,
+    description: 'Qualifies participants in rigging fundamentals and hand/voice signaling techniques. Meets OSHA regulations for cranes and derricks in construction.',
+    category: 'Rigging',
+    pilot: true
+  },
+  {
+    id: 'basic-rigger-signal-es',
+    name: 'Basic Qualified Rigger & Signal Person - Spanish',
+    price: 343,
+    language: 'Spanish',
+    duration: '8 hrs',
+    expiration: '3 Yrs',
+    delivery: 'ILT',
+    classMin: 10,
+    classMax: 30,
+    description: 'Qualifies participants in rigging fundamentals and signaling techniques, delivered fully in Spanish with hands-on practice.',
+    category: 'Rigging',
+    pilot: false
+  },
+  {
+    id: 'fall-protection-day-ilt',
+    name: 'Fall Protection Authorized Standard - Full Day',
+    price: 199,
+    language: 'English',
+    duration: '8 hrs',
+    expiration: '2 Yrs',
+    delivery: 'ILT',
+    classMin: 10,
+    classMax: 12,
+    description: 'Intense full-day course covering advanced fall protection system setups, harness inspections, calculated clearance, and rescue plan guidelines.',
+    category: 'Safety & OSHA',
+    pilot: false
+  },
+  {
+    id: 'fall-protection-elearning',
+    name: 'Fall Protection Authorized Standard - eLearning Only',
+    price: 90,
+    language: 'English',
+    duration: '4 hrs (no PE)',
+    expiration: '2 Yrs',
+    delivery: 'eLearning',
+    classMin: 1,
+    classMax: 'N/A',
+    description: 'In-depth digital training covering OSHA and ANSI guidelines for standard active fall arrests.',
+    category: 'Safety & OSHA',
+    pilot: false
+  },
+  {
+    id: 'excavation-competent-ilt',
+    name: 'Excavation Safety Training for Competent Persons',
+    price: 188,
+    language: 'English',
+    duration: '6 hrs',
+    expiration: 'None',
+    delivery: 'ILT',
+    classMin: 10,
+    classMax: 30,
+    description: 'Designed to qualify the jobsite "Competent Person" under OSHA standards. Deep dive into soil classification, protective support systems, and daily safety checklist processes.',
+    category: 'Safety & OSHA',
+    pilot: false
+  },
+  {
+    id: 'warehouse-forklift-ilt',
+    name: 'Warehouse Forklift Operator Certification',
+    price: 303,
+    language: 'English',
+    duration: '4 hrs + PE',
+    expiration: '3 Yrs',
+    delivery: 'ILT',
+    classMin: 4,
+    classMax: 8,
+    description: 'Full operator safety compliance for industrial masted warehouse counterbalance forklifts. Practical evaluation is conducted live at regional facilities or client warehouses.',
+    category: 'Aerial & Lift',
+    pilot: false
+  },
+  {
+    id: 'tracked-dozer-trainer',
+    name: 'Certified Trainer - Tracked Dozer',
+    price: 1599,
+    language: 'English',
+    duration: '3 days',
+    expiration: '3 Yrs',
+    delivery: 'ILT',
+    classMin: 4,
+    classMax: 8,
+    description: 'Train-the-Trainer qualification program enabling ProScore site supervisors to deliver safe dozer operational and checklist programs internally with UR support.',
+    category: 'Other',
+    pilot: false
+  }
+];
+
+export const INITIAL_AVAILABLE_DATES: AvailableDate[] = [
+  { id: 'ad-1', courseId: 'osha-10-ilt', date: '2026-06-18', maxCapacity: 40, enrolled: 22, location: 'United Academy Regional Training Facility, Houston TX' },
+  { id: 'ad-2', courseId: 'osha-10-ilt', date: '2026-06-25', maxCapacity: 40, enrolled: 5, location: 'United Academy Regional Training Facility, Atlanta GA' },
+  { id: 'ad-3', courseId: 'skid-steer-ilt', date: '2026-06-20', maxCapacity: 10, enrolled: 7, location: 'United Academy Training Yard, Orlando FL' },
+  { id: 'ad-4', courseId: 'skid-steer-ilt', date: '2026-06-24', maxCapacity: 10, enrolled: 2, location: 'United Academy Training Yard, Phoenix AZ' },
+  { id: 'ad-5', courseId: 'rough-terrain-forklift-ilt', date: '2026-06-22', maxCapacity: 10, enrolled: 8, location: 'United Academy Regional Facility, Denver CO' },
+  { id: 'ad-6', courseId: 'rough-terrain-forklift-ilt', date: '2026-06-29', maxCapacity: 10, enrolled: 1, location: 'United Academy Regional Facility, Denver CO' },
+  { id: 'ad-7', courseId: 'aerial-lift-bundle-ilt', date: '2026-06-23', maxCapacity: 8, enrolled: 6, location: 'United Academy Regional Training Facility, Houston TX' },
+  { id: 'ad-8', courseId: 'aerial-lift-bundle-ilt', date: '2026-06-30', maxCapacity: 8, enrolled: 0, location: 'United Academy Regional Training Facility, Charlotte NC' },
+  { id: 'ad-9', courseId: 'basic-rigger-signal-ilt', date: '2026-07-02', maxCapacity: 30, enrolled: 14, location: 'United Academy Training Hub, Atlanta GA' }
+];
+
+export const DEFAULT_REQUESTS = [
+  {
+    id: 'req-101',
+    companyName: 'Apex Renewable Power LLC',
+    courseId: 'osha-10-ilt',
+    courseName: 'OSHA 10-Hour Construction Safety',
+    coursePrice: 239,
+    deliveryType: 'On-Site Crew',
+    headcount: 14,
+    datePreference: '2026-07-10',
+    location: '1420 Sunbeam Way, Solar Field Site, Pecos TX',
+    locationType: 'On-Site',
+    billingContact: {
+      name: 'Sarah Jenkins',
+      email: 'sjenkins@apexrenewables.com',
+      phone: '(432) 555-0192'
+    },
+    participants: [
+      'John Carter', 'David Miller', 'Armando Gomez', 'Tyler Vance', 'Luke Simmons', 
+      'Michael Ross', 'Devin Patel', 'Jesse Vance', 'Kaleb West', 'Raul Diaz',
+      'Frank Sterling', 'Cody Woods', 'Ben Hawkins', 'Gavin Pierce'
+    ],
+    status: 'Inquiry',
+    markupPercent: 15,
+    createdAt: '2026-06-12T14:32:00Z',
+    notes: 'Requested on-site safety safety training for high performance solar assembly crew. Apex needs billing invoice sent separate to accounts payable.',
+    timeline: [
+      { status: 'Inquiry', timestamp: '2026-06-12T14:32:00Z', message: 'Inquiry submitted online via On-Site request form.' },
+      { status: 'Inquiry', timestamp: '2026-06-12T14:35:00Z', message: 'Automated ProScore receipt send confirmation email dispatched to Sarah Jenkins.' }
+    ]
+  },
+  {
+    id: 'req-102',
+    companyName: 'Titan Infrastructure Group',
+    courseId: 'skid-steer-ilt',
+    courseName: 'Skid Steer Loader Operator Certification',
+    coursePrice: 199,
+    deliveryType: 'ILT',
+    headcount: 3,
+    datePreference: '2026-06-20',
+    location: 'United Academy Training Yard, Orlando FL',
+    locationType: 'Facility',
+    billingContact: {
+      name: 'Marcus Brody',
+      email: 'mbrody@titanconstruct.com',
+      phone: '(407) 555-8833'
+    },
+    participants: ['Ryan Henderson', 'Carlos Alvarez', 'Toby Keith'],
+    status: 'Scheduled',
+    markupPercent: 12,
+    createdAt: '2026-06-10T09:15:00Z',
+    notes: 'Registered individuals directly into UR facility scheduled date in Orlando. Coordinator verified seats and confirmed.',
+    timeline: [
+      { status: 'Inquiry', timestamp: '2026-06-10T09:15:00Z', message: 'Interest registered into scheduled June 20 session.' },
+      { status: 'Inquiry', timestamp: '2026-06-10T11:00:00Z', message: 'ProScore representative emailed United Rentals representative to block seats.' },
+      { status: 'Scheduled', timestamp: '2026-06-11T14:20:00Z', message: 'United Rentals (Clint C.) confirmed seat reservation. Client-facing email and calendar invite sent.' }
+    ]
+  },
+  {
+    id: 'req-103',
+    companyName: 'Beacon Tower Services',
+    courseId: 'aerial-lift-bundle-ilt',
+    courseName: 'Aerial Boomlift & Scissor Lift Operator Certification',
+    coursePrice: 239,
+    deliveryType: 'eLearning',
+    headcount: 5,
+    datePreference: '2026-06-23',
+    location: 'United Academy Regional Training Facility, Houston TX',
+    locationType: 'Facility',
+    billingContact: {
+      name: 'Elena Rostova',
+      email: 'erostova@beacontowers.com',
+      phone: '(713) 555-9110'
+    },
+    participants: ['Artem Volkov', 'Dmitry Orlov', 'Lev Sidorov', 'Yuri Gagarin', 'Ivan Ivanov'],
+    status: 'Completed',
+    markupPercent: 15,
+    createdAt: '2026-06-05T11:15:00Z',
+    notes: 'Completed in-person training at Houston facility. Waiting for United Rentals to provide original completion roster before exporting Proscore certificates.',
+    timeline: [
+      { status: 'Inquiry', timestamp: '2026-06-05T11:15:00Z', message: 'Inquiry received for Houston regional facility class.' },
+      { status: 'Scheduled', timestamp: '2026-06-06T10:00:00Z', message: 'Class confirmed and scheduled with participants.' },
+      { status: 'Completed', timestamp: '2026-06-14T17:00:00Z', message: 'Session training finished. Attendance records and course sheets received from UR instructor.' }
+    ]
+  }
+];

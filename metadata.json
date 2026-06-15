@@ -1,0 +1,6 @@
+{
+  "name": "ProScore UR Training Marketplace",
+  "description": "Interactive prototype for ProScore and United Rentals training partnership, including course catalog, scheduling, a diagnostic questionnaire, and a master tracking dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
