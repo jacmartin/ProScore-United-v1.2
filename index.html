@@ -116,101 +116,461 @@
   <!-- Main view wrapper -->
   <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-    <!-- HOME/WELCOME HERO VIEW (Standardized Landing Option) -->
-    <template x-if="currentView === 'home'">
-      <div class="space-y-12 py-4">
-        <!-- Hero section -->
-        <div class="text-center max-w-3xl mx-auto space-y-4">
-          <span class="px-3 py-1 bg-orange-500/15 text-brand-orange text-xs font-mono font-bold rounded-full uppercase tracking-wider">
-            Enterprise Client Hub Session Portal
-          </span>
-          <h1 class="text-4xl md:text-5xl font-display font-black text-slate-900 tracking-tight leading-none">
-            Scale Workforce Safety with <br class="hidden sm:inline"> Only One Click.
-          </h1>
-          <p class="text-slate-600 text-sm md:text-base leading-relaxed font-sans max-w-2xl mx-auto">
-            ProScore has co-developed this custom safety marketplace prototype alongside United Academy. Use the automated pipelines to book certified seats, draft scheduling requests, and manage workforce compliance.
-          </p>
-        </div>
-
-        <!-- Three pathways bifurcation (Bento card row) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-          <!-- Path A: Catalog -->
-          <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 flex flex-col justify-between shadow-xs hover:border-slate-300 transition-all">
-            <div class="space-y-4">
-              <div class="h-10 w-10 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center shadow-xs">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+    <!-- WIZARD BOOKING SYSTEM (ULTRA-SIMPLE CALENDAR DESIGN) -->
+    <template x-if="currentView === 'wizard'">
+      <div class="space-y-6">
+        <!-- Progress Bar Indicator -->
+        <div class="max-w-4xl mx-auto mb-6 bg-white border border-slate-200 rounded-2xl p-4 shadow-3xs">
+          <div class="flex items-center justify-between font-sans">
+            <!-- Step 1 Button -->
+            <button @click="wizardStep >= 1 ? wizardStep = 1 : null" class="flex-1 flex flex-col items-center gap-1.5 focus:outline-hidden" :class="wizardStep >= 1 ? 'cursor-pointer' : 'opacity-45 cursor-default'">
+              <div class="h-8 w-8 rounded-full flex items-center justify-center font-display font-semibold text-xs transition"
+                   :class="wizardStep === 1 ? 'bg-orange-500 text-white ring-4 ring-orange-500/20' : (wizardStep > 1 ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400')">
+                <template x-if="wizardStep > 1"><svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg></template>
+                <template x-if="wizardStep <= 1"><span>1</span></template>
               </div>
-              <h3 class="text-lg font-display font-bold text-slate-900">PATH A: Directory Catalog</h3>
-              <p class="text-xs text-slate-500 leading-relaxed">
-                Directly explore our comprehensive safety syllabus including OSHA 10, skid steers, boomlifts, rigging, and specialist courses.
-              </p>
-            </div>
-            <button @click="setMarketplaceFilters('All', 'All', true); setView('catalog')" class="w-full mt-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors uppercase tracking-wider">
-              Browse Directory
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              <span class="text-[10px] font-mono font-bold tracking-tight uppercase" :class="wizardStep === 1 ? 'text-brand-orange' : (wizardStep > 1 ? 'text-slate-650' : 'text-slate-400')">Course Selection</span>
             </button>
-          </div>
+            <div class="flex-grow h-0.5 max-w-[40px] sm:max-w-[120px]" :class="wizardStep > 1 ? 'bg-emerald-500' : 'bg-slate-100'"></div>
 
-          <!-- Path B: Direct request -->
-          <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 flex flex-col justify-between shadow-xs hover:border-slate-300 transition-all">
-            <div class="space-y-4">
-              <div class="h-10 w-10 bg-orange-50 text-brand-orange rounded-2xl flex items-center justify-center shadow-xs">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            <!-- Step 2 Button -->
+            <button @click="wizardStep >= 2 ? wizardStep = 2 : null" class="flex-1 flex flex-col items-center gap-1.5 focus:outline-hidden" :class="wizardStep >= 2 ? 'cursor-pointer' : 'opacity-45 cursor-default'">
+              <div class="h-8 w-8 rounded-full flex items-center justify-center font-display font-semibold text-xs transition"
+                   :class="wizardStep === 2 ? 'bg-orange-500 text-white ring-4 ring-orange-500/20' : (wizardStep > 2 ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400')">
+                <template x-if="wizardStep > 2"><svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg></template>
+                <template x-if="wizardStep <= 2"><span>2</span></template>
               </div>
-              <h3 class="text-lg font-display font-bold text-slate-900">PATH B: Quick Intake Form</h3>
-              <p class="text-xs text-slate-500 leading-relaxed">
-                Skip catalog browsing if you already have training specs. Load the standardized booking form to lock in custom dates.
-              </p>
-            </div>
-            <button @click="openDirectIntake()" class="w-full mt-6 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors uppercase tracking-wider shadow-sm">
-              Launch Request Form
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              <span class="text-[10px] font-mono font-bold tracking-tight uppercase" :class="wizardStep === 2 ? 'text-brand-orange' : (wizardStep > 2 ? 'text-slate-655' : 'text-slate-400')">Date & Yard</span>
             </button>
-          </div>
+            <div class="flex-grow h-0.5 max-w-[40px] sm:max-w-[120px]" :class="wizardStep > 2 ? 'bg-emerald-500' : 'bg-slate-100'"></div>
 
-          <!-- Path C: Recommendation Engine -->
-          <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 flex flex-col justify-between shadow-xs hover:border-slate-300 transition-all">
-            <div class="space-y-4">
-              <div class="h-10 w-10 bg-blue-50 text-blue-650 rounded-2xl flex items-center justify-center shadow-xs">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+            <!-- Step 3 Button -->
+            <button @click="wizardStep >= 3 ? wizardStep = 3 : null" class="flex-1 flex flex-col items-center gap-1.5 focus:outline-hidden" :class="wizardStep >= 3 ? 'cursor-pointer' : 'opacity-45 cursor-default'">
+              <div class="h-8 w-8 rounded-full flex items-center justify-center font-display font-semibold text-xs transition"
+                   :class="wizardStep === 3 ? 'bg-orange-500 text-white ring-4 ring-orange-500/20' : (wizardStep > 3 ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400')">
+                <template x-if="wizardStep > 3"><svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg></template>
+                <template x-if="wizardStep <= 3"><span>3</span></template>
               </div>
-              <h3 class="text-lg font-display font-bold text-slate-900">PATH C: Safety Assessment Quiz</h3>
-              <p class="text-xs text-slate-500 leading-relaxed">
-                Unsure of the specific safety standard? Complete our 4-step interactive analyzer to get precise course matches.
-              </p>
-            </div>
-            <button @click="setView('quiz')" class="w-full mt-6 py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors uppercase tracking-wider">
-              Take Safety Audit
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              <span class="text-[10px] font-mono font-bold tracking-tight uppercase" :class="wizardStep === 3 ? 'text-brand-orange' : (wizardStep > 3 ? 'text-slate-655' : 'text-slate-400')">Accounts Info</span>
+            </button>
+            <div class="flex-grow h-0.5 max-w-[40px] sm:max-w-[120px]" :class="wizardStep > 3 ? 'bg-emerald-500' : 'bg-slate-100'"></div>
+
+            <!-- Step 4 Button -->
+            <button @click="wizardStep >= 4 ? wizardStep = 4 : null" class="flex-1 flex flex-col items-center gap-1.5 focus:outline-hidden" :class="wizardStep >= 4 ? 'cursor-pointer' : 'opacity-45 cursor-default'">
+              <div class="h-8 w-8 rounded-full flex items-center justify-center font-display font-semibold text-xs transition"
+                   :class="wizardStep === 4 ? 'bg-orange-500 text-white ring-4 ring-orange-500/20' : (wizardStep > 4 ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400')">
+                <template x-if="wizardStep > 4"><svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg></template>
+                <template x-if="wizardStep <= 4"><span>4</span></template>
+              </div>
+              <span class="text-[10px] font-mono font-bold tracking-tight uppercase" :class="wizardStep === 4 ? 'text-brand-orange' : (wizardStep > 4 ? 'text-slate-655' : 'text-slate-400')">Operator Names</span>
+            </button>
+            <div class="flex-grow h-0.5 max-w-[40px] sm:max-w-[120px]" :class="wizardStep > 4 ? 'bg-emerald-500' : 'bg-slate-100'"></div>
+
+            <!-- Step 5 Button -->
+            <button @click="wizardStep >= 5 ? wizardStep = 5 : null" class="flex-1 flex flex-col items-center gap-1.5 focus:outline-hidden" :class="wizardStep >= 5 ? 'cursor-pointer' : 'opacity-45 cursor-default'">
+              <div class="h-8 w-8 rounded-full flex items-center justify-center font-display font-semibold text-xs transition"
+                   :class="wizardStep === 5 ? 'bg-orange-500 text-white ring-4 ring-orange-500/20' : 'bg-slate-100 text-slate-400'">
+                <span>5</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold tracking-tight uppercase" :class="wizardStep === 5 ? 'text-brand-orange' : 'text-slate-400'">Review & lock</span>
             </button>
           </div>
         </div>
 
-        <!-- Featured Pilot Courses Promo -->
-        <div class="space-y-5 bg-white border border-slate-200 p-6 rounded-3xl">
-          <div class="flex justify-between items-center">
-            <div>
-              <h3 class="font-display font-bold text-lg text-slate-900">Active Joint Training Pilot Programs</h3>
-              <p class="text-xs text-slate-550 leading-relaxed">Top safety curriculum curated for prompt enrollment.</p>
-            </div>
-            <button @click="setMarketplaceFilters('All', 'All', true); setView('catalog')" class="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
-              View All Catalog (17 courses) &rarr;
-            </button>
+        <!-- STEP 1: SAFETY CATALOG -->
+        <div x-show="wizardStep === 1" class="space-y-6 max-w-5xl mx-auto">
+          <div class="text-center max-w-xl mx-auto">
+            <span class="px-2 py-0.5 bg-orange-100 text-brand-orange font-mono font-black text-[9px] uppercase tracking-wider rounded">Step 1 of 5</span>
+            <h2 class="text-2xl md:text-3xl font-display font-black text-slate-900 tracking-tight mt-1">Select Certification Course</h2>
+            <p class="text-slate-505 text-xs mt-1">Select from our accredited equipment training syllabus below. Each slot conforms to rigorous ANSI/OSHA frameworks.</p>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <template x-for="c in courses.filter(item => item.pilot).slice(0, 4)" :key="c.id">
-              <div class="bg-slate-50/60 p-4 rounded-2xl border border-slate-100 flex flex-col justify-between">
-                <div>
-                  <span class="inline-block text-[9px] font-mono font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded uppercase tracking-wider mb-2">PILOT STAGE</span>
-                  <h4 class="font-display font-bold text-sm text-slate-900 line-clamp-1" x-text="c.name"></h4>
-                  <p class="text-[11px] text-slate-500 mt-1 line-clamp-2" x-text="c.description"></p>
+
+          <!-- Filters -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-3xs flex flex-col sm:flex-row gap-4 items-center justify-between">
+            <div class="flex flex-wrap gap-1.5 justify-center">
+              <template x-for="cat in ['All', ...categories]" :key="cat">
+                <button @click="wizardSelectedCategory = cat" 
+                        class="px-3.5 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
+                        :class="wizardSelectedCategory === cat ? 'bg-slate-900 text-white' : 'bg-slate-50 border border-slate-200 hover:bg-slate-100 text-slate-655'">
+                  <span x-text="cat === 'All' ? 'All Classes' : cat"></span>
+                </button>
+              </template>
+            </div>
+
+            <div class="relative w-full sm:w-72">
+              <input type="text" x-model="wizardSearchQuery" placeholder="Search safety standard..." 
+                     class="w-full text-xs py-2 pl-3 pr-8 border border-slate-200 rounded-xl focus:outline-hidden font-semibold text-slate-800 placeholder-slate-400">
+            </div>
+          </div>
+
+          <!-- Courses Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <template x-for="c in courses.filter(item => {
+              const matchSearch = wizardSearchQuery === '' || item.name.toLowerCase().includes(wizardSearchQuery.toLowerCase()) || item.description.toLowerCase().includes(wizardSearchQuery.toLowerCase());
+              const matchCat = wizardSelectedCategory === 'All' || item.category === wizardSelectedCategory;
+              return matchSearch && matchCat;
+            })" :key="c.id">
+              <div @click="wizardSelectedCourse = c; selectAndAdvanceToStep2(c)" 
+                   class="bg-white p-5 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between gap-4 hover:border-slate-350 shadow-3xs"
+                   :class="wizardSelectedCourse?.id === c.id ? 'border-brand-orange ring-4 ring-orange-500/10 bg-orange-50/5' : 'border-slate-200'">
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center gap-2">
+                    <span class="text-[9px] font-mono leading-none tracking-widest font-extrabold uppercase px-1.5 py-0.5 rounded bg-slate-100 text-slate-600" x-text="c.category"></span>
+                    <span class="text-[9px] font-mono leading-none font-bold uppercase py-0.5 px-1.5 rounded" 
+                          :class="c.delivery === 'ILT' ? 'bg-emerald-50 text-emerald-700' : 'bg-blue-50 text-blue-700'"
+                          x-text="c.delivery === 'ILT' ? 'Evaluation Yard' : 'On-Demand Portal'"></span>
+                  </div>
+                  <h3 class="font-display font-bold text-slate-905 text-sm tracking-tight" x-text="c.name"></h3>
+                  <p class="text-[11px] text-slate-500 leading-relaxed font-sans line-clamp-2" x-text="c.description"></p>
                 </div>
-                <div class="flex justify-between items-center pt-4 border-t border-slate-150/55 mt-4">
-                  <span class="text-xs font-mono font-bold text-slate-900" x-text="'$' + c.price + '/seat'"></span>
-                  <button @click="inspectCourse(c)" class="text-xs font-bold text-orange-600 hover:text-orange-700">Enroll &rarr;</button>
+                <div class="flex justify-between items-end pt-2.5 border-t border-slate-100">
+                  <div>
+                    <span class="text-slate-900 font-display font-extrabold text-base block" x-text="'$' + c.price"></span>
+                    <span class="text-[8px] font-mono font-bold text-slate-400 block uppercase" x-text="'EXP: ' + c.expiration + ' | ' + c.duration"></span>
+                  </div>
+                  <div class="h-7 w-7 rounded-full flex items-center justify-center transition-colors"
+                       :class="wizardSelectedCourse?.id === c.id ? 'bg-brand-orange text-white' : 'bg-slate-100 text-slate-500'">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+                  </div>
                 </div>
               </div>
             </template>
+          </div>
+
+          <!-- Floating selection bar -->
+          <div x-show="wizardSelectedCourse" class="bg-slate-950 text-white rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-md">
+            <div>
+              <span class="text-[9px] font-mono text-slate-400 block uppercase tracking-wider">SELECTED YARD CURRICULA:</span>
+              <span class="font-display font-bold text-xs" x-text="wizardSelectedCourse?.name"></span>
+            </div>
+            <button @click="wizardStep = 2" class="w-full sm:w-auto py-2.5 px-5 bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1 transition-all uppercase tracking-wider shadow-sm cursor-pointer">
+              Go to Calendar ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: DATE & LOCATION SELECTOR -->
+        <div x-show="wizardStep === 2" class="space-y-6 max-w-5xl mx-auto">
+          <div class="text-center max-w-xl mx-auto">
+            <span class="px-2 py-0.5 bg-orange-100 text-brand-orange font-mono font-black text-[9px] uppercase tracking-wider rounded">Step 2 of 5</span>
+            <h2 class="text-2xl md:text-3xl font-display font-black text-slate-900 tracking-tight mt-1">Choose Training Date & Yard</h2>
+            <p class="text-slate-550 text-xs mt-1">Select a green Guaranteed class block, or click any available weekday to coordinator on-site delivery.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <!-- Grid Left: Calendar -->
+            <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 p-5 shadow-3xs space-y-3">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                <button type="button" @click="decreaseCalendarMonth()" class="h-8 w-8 border border-slate-200 hover:bg-slate-50 rounded-lg flex items-center justify-center cursor-pointer pb-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <h3 class="text-md font-display font-black text-slate-905 mt-1 animate-fade-in" x-text="getCalendarMonthName() + ' ' + calendarYear"></h3>
+                <button type="button" @click="increaseCalendarMonth()" class="h-8 w-8 border border-slate-200 hover:bg-slate-50 rounded-lg flex items-center justify-center cursor-pointer pb-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-7 gap-1 text-center">
+                <template x-for="nm in ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']" :key="nm">
+                  <span class="text-[8px] font-mono font-bold text-slate-400 py-0.5" x-text="nm"></span>
+                </template>
+              </div>
+
+              <div class="grid grid-cols-7 gap-1">
+                <template x-for="(cell, idx) in getCalendarWeeks()" :key="idx">
+                  <div class="relative">
+                    <template x-if="cell.day === null">
+                      <div class="aspect-square bg-slate-50/20"></div>
+                    </template>
+                    
+                    <template x-if="cell.day !== null">
+                      <button type="button" @click="selectDateFromCalendar(cell)" 
+                              class="w-full aspect-square flex flex-col justify-between p-1 rounded-xl border text-left cursor-pointer transition-all focus:outline-hidden"
+                              :class="isSelectedDate(cell)
+                                ? 'bg-orange-50 border-brand-orange ring-2 ring-orange-500/15 text-orange-950 font-black' 
+                                : (cell.isAvailable 
+                                  ? 'bg-emerald-50 border-emerald-200 text-emerald-950 hover:bg-emerald-100 hover:border-emerald-300' 
+                                  : 'bg-white border-slate-100 text-slate-700 hover:bg-slate-50')">
+                        <span class="text-[10px] font-mono leading-none" x-text="cell.day"></span>
+                        <template x-if="cell.isAvailable">
+                          <span class="h-1 w-1 bg-emerald-500 rounded-full block self-end animate-pulse"></span>
+                        </template>
+                      </button>
+                    </template>
+                  </div>
+                </template>
+              </div>
+
+              <div class="pt-2 border-t border-slate-100 flex gap-4 text-[9px] font-mono text-slate-400 justify-center">
+                <div class="flex items-center gap-1">
+                  <span class="h-2 w-2 rounded bg-emerald-150 border border-emerald-300 block"></span>
+                  <span>Guaranteed Yard Block</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="h-2 w-2 rounded bg-white border border-slate-200 block"></span>
+                  <span>Custom Day Target</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="h-2 w-2 rounded bg-orange-50 border border-brand-orange block"></span>
+                  <span>Selected Target</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grid Right: Sidebar Detail -->
+            <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-5 shadow-3xs flex flex-col justify-between min-h-[300px] space-y-4">
+              <div class="space-y-3">
+                <span class="text-[8px] font-mono bg-orange-105 text-orange-600 px-1.5 py-0.5 rounded uppercase font-bold leading-none block w-fit">COORDINATION COORDINATES</span>
+                <h3 class="font-display font-semibold text-sm text-slate-900 leading-snug" x-text="wizardSelectedCourse?.name"></h3>
+
+                <div class="space-y-2">
+                  <div x-show="!customDateActive && wizardSelectedDate" class="space-y-2">
+                    <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-200 text-[11px] leading-relaxed text-slate-800">
+                      <strong>✓ GUARANTEED SLOT COMPLIANCE:</strong> You select the existing classroom block running on <strong x-text="wizardSelectedDate"></strong>.
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl text-[11px] text-slate-600">
+                      <strong class="text-slate-800 block text-xs">UA TRAINING FACILITY YARD</strong>
+                      <span class="block mt-0.5 font-mono" x-text="getAvailableDateLocation(wizardSelectedCourse?.id, wizardSelectedDate)"></span>
+                    </div>
+                  </div>
+
+                  <div x-show="customDateActive" class="space-y-3">
+                    <div class="bg-blue-50/60 p-3 rounded-xl border border-blue-200 text-[11px] text-slate-705 leading-relaxed">
+                      <strong>✦ DEMAND ON-SITE DELIVERY:</strong> No schedules fit? Propose a weekday date at your corporate fields.
+                    </div>
+                    <div class="space-y-2 text-xs">
+                      <label class="block font-semibold text-slate-600">Proposed Target Date</label>
+                      <input type="date" x-model="customDateInputVal" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-slate-705">
+                      <label class="block font-semibold text-slate-600">Site/Yard Physical Address</label>
+                      <input type="text" x-model="customLocationText" placeholder="Your Yard / Site Address" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-slate-750">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-2 font-mono">
+                <button @click="wizardStep = 1" class="py-2.5 px-3.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl text-xs font-bold uppercase cursor-pointer">
+                  Prev
+                </button>
+                <button @click="wizardStep = 3" :disabled="!wizardSelectedDate && !customDateActive"
+                        class="flex-grow py-2.5 px-4 bg-brand-orange hover:bg-brand-orange-hover disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold uppercase transition tracking-wider flex items-center justify-center gap-1 cursor-pointer">
+                  Billing Details ➔
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: CONTACT & HEADCOUNT -->
+        <div x-show="wizardStep === 3" class="space-y-6 max-w-xl mx-auto bg-white rounded-2xl border border-slate-200 p-6 shadow-3xs">
+          <div class="text-center font-sans">
+            <span class="px-2 py-0.5 bg-orange-100 text-brand-orange font-mono font-black text-[9px] uppercase tracking-wider rounded">Step 3 of 5</span>
+            <h2 class="text-2xl font-display font-black text-slate-900 tracking-tight mt-1">AP Company & Coordinator</h2>
+            <p class="text-slate-500 text-xs mt-1">Invoices dispatch and qualifications route to this Accounts Payable coordination desk.</p>
+          </div>
+
+          <div class="space-y-4 pt-1 text-xs">
+            <div class="space-y-1">
+              <label class="block font-semibold text-slate-600">Contractor Company Name (*)</label>
+              <input type="text" x-model="companyNameInput" placeholder="e.g. Acme Solar Infrastructure" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-hidden">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="space-y-1">
+                <label class="block font-semibold text-slate-600">AP Clerk Officer Name</label>
+                <input type="text" x-model="billingContactNameVal" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 font-semibold text-xs focus:outline-hidden">
+              </div>
+              <div class="space-y-1">
+                <label class="block font-semibold text-slate-600">AP Coordinator Phone</label>
+                <input type="text" x-model="billingContactPhoneVal" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 font-semibold text-xs focus:outline-hidden">
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label class="block font-semibold text-slate-600">Accounts Payable Email Address (*)</label>
+              <input type="email" x-model="billingContactEmailVal" placeholder="ap@company.com" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-800 font-semibold text-xs focus:outline-hidden">
+            </div>
+
+            <hr class="border-slate-100">
+
+            <!-- CAPACITY SELECTOR -->
+            <div class="space-y-2 pt-1 text-center font-sans">
+              <span class="text-[9px] font-mono text-slate-400 font-bold uppercase block">COHORT OPERATORS CAPACITY</span>
+              <div class="flex items-center justify-center gap-4 max-w-[200px] mx-auto">
+                <button type="button" @click="updateHeadcount(-1)" class="h-9 w-9 rounded-xl bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-900 font-bold flex items-center justify-center cursor-pointer select-none">－</button>
+                <div class="text-center min-w-[50px]">
+                  <span class="text-2xl font-display font-black text-slate-950 block" x-text="headcountInput"></span>
+                  <span class="text-[8px] font-mono text-slate-400 uppercase">Seats</span>
+                </div>
+                <button type="button" @click="updateHeadcount(1)" class="h-9 w-9 rounded-xl bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-900 font-bold flex items-center justify-center cursor-pointer select-none">＋</button>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label class="block font-semibold text-slate-600">Special Instructions / Notes</label>
+              <input type="text" x-model="notesInputVal" placeholder="Optional boot sizing notes" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-hidden">
+            </div>
+
+            <div class="bg-slate-50 border border-slate-150 p-3.5 rounded-xl flex items-center justify-between">
+              <div class="text-left space-y-0.5">
+                <span class="text-[8px] font-mono text-slate-400 uppercase block font-bold">Estimated Ledger Net 15 Projection</span>
+                <span class="text-sm font-display font-black text-slate-905" x-text="'$' + Math.round((wizardSelectedCourse?.price * headcountInput) * 1.15).toLocaleString() + '.00 Net'"></span>
+              </div>
+              <div class="text-[9px] text-brand-orange bg-orange-50 font-mono font-bold px-2 py-1 rounded border border-orange-100 uppercase">Partner Discount Terms</div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex justify-between gap-2 font-mono">
+            <button @click="wizardStep = 2" class="py-2.5 px-3.5 bg-slate-100 border border-slate-200 rounded-xl hover:bg-slate-200 text-slate-700 uppercase cursor-pointer text-xs font-bold text-center">
+              Prev
+            </button>
+            <button @click="wizardStep = 4" :disabled="!companyNameInput || !billingContactEmailVal"
+                    class="py-2.5 px-4 bg-brand-orange hover:bg-brand-orange-hover disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold uppercase cursor-pointer">
+              Enter Crew Roster Name ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: CREW ROSTER -->
+        <div x-show="wizardStep === 4" class="space-y-6 max-w-xl mx-auto bg-white rounded-2xl border border-slate-200 p-6 shadow-3xs">
+          <div class="text-center font-sans">
+            <span class="px-2 py-0.5 bg-orange-100 text-brand-orange font-mono font-black text-[9px] uppercase tracking-wider rounded">Step 4 of 5</span>
+            <h2 class="text-2xl font-display font-black text-slate-900 tracking-tight mt-1">Register Operator Names</h2>
+            <p class="text-slate-555 text-xs mt-1">Input crew operator list for wallet card registry compliance.</p>
+          </div>
+
+          <div class="flex justify-center mb-2 font-mono">
+            <div class="bg-slate-50 border border-slate-200 p-1 rounded-xl flex gap-1.5 text-xs font-semibold">
+              <button @click="bulkRosterMode = false" class="px-3 py-1 rounded-lg transition-all border border-transparent" :class="!bulkRosterMode ? 'bg-white shadow-3xs text-slate-955 font-semibold' : 'text-slate-540'">Individual Slots</button>
+              <button @click="bulkRosterMode = true" class="px-3 py-1 rounded-lg transition-all border border-transparent" :class="bulkRosterMode ? 'bg-white shadow-3xs text-slate-955 font-semibold' : 'text-slate-540'">Bulk Paste</button>
+            </div>
+          </div>
+
+          <div x-show="!bulkRosterMode" class="space-y-2.5 max-h-64 overflow-y-auto pr-1">
+            <template x-for="idx in Array.from({ length: headcountInput }).map((_, i) => i)" :key="idx">
+              <div class="flex items-center gap-3 bg-slate-50/50 border border-slate-100 px-3 py-1.5 rounded-xl font-mono">
+                <span class="font-mono text-[10px] font-bold text-slate-400 w-5" x-text="'#' + (idx + 1)"></span>
+                <input type="text" x-model="participantsNames[idx]" :placeholder="'Enter Operator #' + (idx + 1) + ' Name'" 
+                       class="flex-grow text-xs font-semibold bg-white border border-slate-250 rounded-lg px-2.5 py-1.5 focus:outline-hidden text-slate-850">
+              </div>
+            </template>
+          </div>
+
+          <div x-show="bulkRosterMode" class="space-y-2 font-mono">
+            <textarea x-model="bulkRosterText" rows="4" placeholder="Operator Name 1&#10;Operator Name 2"
+                      class="w-full text-xs font-semibold bg-slate-55 border border-slate-200 rounded-xl p-3 focus:outline-hidden text-slate-800"></textarea>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex justify-between gap-2 font-mono">
+            <button @click="wizardStep = 3" class="py-2.5 px-3.5 bg-slate-100 border border-slate-200 rounded-xl hover:bg-slate-200 text-slate-700 uppercase cursor-pointer text-xs font-bold">
+              Prev
+            </button>
+            <button @click="wizardStep = 5"
+                    class="py-2.5 px-4 bg-brand-orange hover:bg-brand-orange-hover text-white rounded-xl text-xs font-bold uppercase cursor-pointer">
+              Finish: Review Summary ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 5: LEDGER RECEIPT -->
+        <div x-show="wizardStep === 5" class="space-y-6 max-w-xl mx-auto">
+          <div class="text-center font-sans">
+            <span class="px-2 py-0.5 bg-orange-100 text-brand-orange font-mono font-black text-[9px] uppercase tracking-wider rounded">Step 5 of 5</span>
+            <h2 class="text-2xl font-display font-black text-slate-900 tracking-tight mt-1">Review & Dispatch holding</h2>
+            <p class="text-slate-500 text-xs mt-1">Verify training parameters before committing locks into JV accounts ledger.</p>
+          </div>
+
+          <!-- RECEIPT CARD -->
+          <div class="bg-white rounded-2xl border border-slate-250 shadow-sm font-sans divide-y divide-slate-100">
+            <div class="p-5 font-mono text-center space-y-1">
+              <span class="text-amber-800 bg-amber-50 rounded px-2 py-0.5 text-[8px] font-bold">ProScore × United Rentals Safety JV Portal</span>
+              <h3 class="font-display font-black text-slate-950 text-xs tracking-wide">Enterprise Booking holding Ticket</h3>
+            </div>
+
+            <div class="p-5 text-xs space-y-3 font-mono">
+              <div class="flex justify-between">
+                <span class="text-slate-400 font-mono text-[8px] font-bold uppercase">TRAINING Standard:</span>
+                <span class="font-bold text-slate-900 text-right max-w-[250px]" x-text="wizardSelectedCourse?.name"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400 font-mono text-[8px] font-bold uppercase">DATE & SITE YARD:</span>
+                <span class="font-bold text-slate-900 text-right" x-text="customDateActive ? customDateInputVal + ' (On-Site Request)' : wizardSelectedDate"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400 font-mono text-[8px] font-bold uppercase">CONTRACTOR AUDIT:</span>
+                <span class="font-semibold text-slate-900" x-text="companyNameInput"></span>
+              </div>
+              <div class="flex justify-between items-start">
+                <span class="text-slate-400 font-mono text-[8px] font-bold uppercase">OPERATOR ROSTER:</span>
+                <div class="text-right">
+                  <span class="block text-slate-650" x-text="headcountInput + ' seat(s) reserved.'"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 text-xs space-y-1 bg-slate-50/60 font-mono">
+              <div class="flex justify-between font-semibold">
+                <span class="text-slate-500">Retail seat booking</span>
+                <span class="text-slate-700" x-text="'$' + (wizardSelectedCourse?.price * headcountInput) + '.00'"></span>
+              </div>
+              <div class="flex justify-between font-semibold">
+                <span class="text-slate-500">Standard JV operational fee</span>
+                <span class="text-slate-700" x-text="'$' + Math.round((wizardSelectedCourse?.price * headcountInput)*0.15) + '.15'"></span>
+              </div>
+              <div class="flex justify-between font-black text-xs text-slate-950 pt-2 border-t border-slate-150">
+                <span>Accounts Payable Net 15 Due:</span>
+                <span class="text-slate-950 text-sm" x-text="'$' + Math.round((wizardSelectedCourse?.price * headcountInput)*1.15) + '.15'"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row justify-between gap-3 mt-3 font-mono">
+            <button @click="wizardStep = 4" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-605 rounded-xl text-xs font-bold uppercase text-center cursor-pointer">
+              Go Back
+            </button>
+            <button @click="submitWizardInquiry()" 
+                    class="flex-grow py-3 px-6 bg-brand-orange hover:bg-brand-orange-hover text-white rounded-xl text-xs font-black uppercase transition-all tracking-wider flex justify-center items-center gap-1.5 shadow-xs cursor-pointer">
+              Lock in Safe Booking Request ✓
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- REAL-TIME SUCCESS CONFIRMATION RECEIPT -->
+    <template x-if="currentView === 'success'">
+      <div class="space-y-6 max-w-xl mx-auto">
+        <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-xs text-center space-y-6">
+          <div class="h-14 w-14 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-full flex items-center justify-center mx-auto shadow-3xs">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+          </div>
+          
+          <div class="space-y-1.5 font-sans">
+            <h2 class="font-display font-black text-slate-900 text-2xl tracking-normal">Inquiry Locked and Transmitted!</h2>
+            <p class="text-[11px] text-slate-500 max-w-sm mx-auto leading-relaxed">
+              We have locked in your safety queue and synchronized the mutual coordination spreadsheet. Erik G. at the ProScore coordination desk will verify seats availability with United Academy Clint C.
+            </p>
+          </div>
+
+          <!-- Printed Receipt invoice Summary for validation -->
+          <div x-show="selectedRequest" class="bg-slate-50 border border-slate-250 p-4 rounded-xl text-left space-y-2.5 text-xs max-w-xs mx-auto font-mono">
+            <span class="text-[8px] text-slate-450 font-bold uppercase tracking-widest block border-b border-slate-200 pb-1">COORDINATION LEDGER RECEIPT</span>
+            
+            <div class="space-y-1 text-[10px]">
+              <div class="flex justify-between"><span class="text-slate-400">INQUIRY ID:</span> <span class="font-bold text-orange-600" x-text="selectedRequest?.id"></span></div>
+              <div class="flex justify-between"><span class="text-slate-400">CLASS:</span> <span class="font-bold text-slate-800 line-clamp-1 max-w-[150px]" x-text="selectedRequest?.courseName"></span></div>
+              <div class="flex justify-between"><span class="text-slate-400">TARGET DATE:</span> <span class="font-semibold text-slate-800" x-text="selectedRequest?.datePreference"></span></div>
+              <div class="flex justify-between"><span class="text-slate-400">SEATS DECK:</span> <span class="font-bold text-emerald-700" x-text="selectedRequest?.headcount + ' Operator(s)'"></span></div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-center gap-2 font-mono">
+            <button @click="setView('home')" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 rounded-xl font-bold text-[10px] uppercase tracking-wider transition cursor-pointer">
+              Book another Course
+            </button>
+            <button @click="setView('backoffice')" class="py-2.5 px-5 bg-slate-950 hover:bg-slate-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-wider transition shadow-sm cursor-pointer">
+              Go to Coordinators Desk
+            </button>
           </div>
         </div>
       </div>
@@ -652,30 +1012,7 @@
       </div>
     </template>
 
-    <!-- SUCCESS REGISTRATION BANNER DIALOG -->
-    <template x-if="currentView === 'success'">
-      <div class="bg-white rounded-3xl border border-slate-200 p-8 max-w-xl mx-auto shadow-sm text-center space-y-6">
-        <div class="h-14 w-14 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-3xl flex items-center justify-center mx-auto shadow-xs">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        </div>
-        <div class="space-y-1">
-          <h2 class="font-display font-black text-slate-900 text-2xl tracking-tight leading-snug">Registration Inquiry Locked!</h2>
-          <p class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-            Inquiry logged onto ProScore collaborative spreadsheets dashboard. The Joint Partnership desk will verify Available seat capacity and coordinate date locks with United Academy Clint C. within SLA guidelines.
-          </p>
-        </div>
 
-        <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl max-w-xs mx-auto text-left space-y-1.5 text-xs">
-          <div class="flex justify-between"><span class="text-slate-400 font-bold font-mono text-[9px] uppercase">Session ID:</span> <span class="font-mono font-bold text-brand-orange">Pending Review</span></div>
-          <div class="flex justify-between"><span class="text-slate-400 font-bold font-mono text-[9px] uppercase">Partner Sync:</span> <span class="font-semibold text-slate-700">Manual Coordinator Override</span></div>
-        </div>
-
-        <div class="pt-4 border-t border-slate-100 flex justify-center gap-3">
-          <button @click="setView('catalog')" class="py-2.5 px-5 bg-slate-100 hover:bg-slate-200 rounded-xl font-medium text-xs transition">Browse More Courses</button>
-          <button @click="setView('backoffice')" class="py-2.5 px-5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-xs transition">Go To Back-Office</button>
-        </div>
-      </div>
-    </template>
 
     <!-- MASTER BACK-OFFICE OPERATIONS DESK -->
     <template x-if="currentView === 'backoffice'">
@@ -1127,10 +1464,32 @@
     function marketplaceApp() {
       return {
         // App settings and states
-        currentView: 'home',
+        currentView: 'wizard',
         selectedCourse: null,
         selectedDate: '',
         
+        // Step-by-Step Wizard States
+        wizardStep: 1,
+        wizardSelectedCategory: 'All',
+        wizardSearchQuery: '',
+        wizardSelectedCourse: null,
+        wizardSelectedDate: '',
+        calendarYear: 2026,
+        calendarMonth: 5, // June 2026 (0-indexed)
+        customDateActive: false,
+        customDateInputVal: '2026-07-15',
+        customLocationText: 'Summit Regional Field Facility',
+        companyNameInput: '',
+        billingContactNameVal: 'AP Coordinator',
+        billingContactEmailVal: '',
+        billingContactPhoneVal: '(555) 0112-3840',
+        notesInputVal: '',
+        headcountInput: 4,
+        participantsNames: ['', '', '', ''],
+        bulkRosterMode: false,
+        bulkRosterText: '',
+        markupPercent: 15,
+
         // Marketplace Catalog Filters
         catalogSearch: '',
         catalogCategoryFilter: 'All',
@@ -1275,6 +1634,7 @@
           this.availableDates = storedDates ? JSON.parse(storedDates) : initialDatesPreset;
           this.requests = storedRequests ? JSON.parse(storedRequests) : initialRequestsPreset;
           
+          this.resetWizardState();
           this.filterCatalog();
           this.filterRequests();
           if (this.requests.length > 0) {
@@ -1285,23 +1645,57 @@
 
         // Navigation state controllers
         setView(view) {
-          this.currentView = view;
+          if (view === 'home' || view === 'catalog') {
+            this.currentView = 'wizard';
+            this.resetWizardState();
+          } else {
+            this.currentView = view;
+          }
           window.scrollTo({ top: 0, behavior: 'smooth' });
         },
 
+        // Reset wizard parameters
+        resetWizardState() {
+          this.wizardStep = 1;
+          this.wizardSelectedCategory = 'All';
+          this.wizardSearchQuery = '';
+          this.wizardSelectedCourse = null;
+          this.wizardSelectedDate = '';
+          this.calendarYear = 2026;
+          this.calendarMonth = 5; // June 2026 is default
+          this.customDateActive = false;
+          this.customDateInputVal = '2026-07-15';
+          this.customLocationText = 'Summit Construction Field Depot';
+          this.companyNameInput = '';
+          this.billingContactNameVal = 'AP Rep';
+          this.billingContactEmailVal = '';
+          this.billingContactPhoneVal = '(555) 750-1011';
+          this.notesInputVal = '';
+          this.headcountInput = 4;
+          this.participantsNames = ['', '', '', ''];
+          this.bulkRosterMode = false;
+          this.bulkRosterText = '';
+        },
+
+        updateHeadcount(change) {
+          const newVal = Math.max(1, Math.min(100, this.headcountInput + change));
+          this.headcountInput = newVal;
+          while (this.participantsNames.length < newVal) {
+            this.participantsNames.push('');
+          }
+          while (this.participantsNames.length > newVal) {
+            this.participantsNames.pop();
+          }
+        },
+
         setMarketplaceFilters(cat, format, pilot) {
-          this.catalogCategoryFilter = cat;
-          this.catalogDeliveryFilter = format;
-          this.pilotOnly = pilot;
-          this.filterCatalog();
+          this.wizardSelectedCategory = cat;
+          this.setView('wizard');
+          this.wizardStep = 1;
         },
 
         resetMarketplaceFilters() {
-          this.catalogSearch = '';
-          this.catalogCategoryFilter = 'All';
-          this.catalogDeliveryFilter = 'All';
-          this.pilotOnly = false;
-          this.filterCatalog();
+          this.resetWizardState();
         },
 
         getCourseNameById(id) {
@@ -1319,49 +1713,124 @@
         },
 
         inspectCourse(courseObj) {
-          this.selectedCourse = courseObj;
+          this.wizardSelectedCourse = courseObj;
           const openDates = this.getAvailableDatesForCourse(courseObj.id);
-          this.selectedDate = openDates.length > 0 ? openDates[0].date : '';
-          this.setView('catalog');
+          if (openDates.length > 0) {
+            this.wizardSelectedDate = openDates[0].date;
+            this.customDateActive = false;
+            const dParts = openDates[0].date.split('-');
+            this.calendarYear = parseInt(dParts[0]);
+            this.calendarMonth = parseInt(dParts[1]) - 1;
+          } else {
+            this.wizardSelectedDate = '';
+            this.customDateActive = true;
+            this.calendarYear = 2026;
+            this.calendarMonth = 6; // July
+          }
+          this.setView('wizard');
+          this.wizardStep = 2;
+        },
+
+        // Interactive Kiosk Calendar methods
+        getCalendarMonthName() {
+          const names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          return names[this.calendarMonth] || "June";
+        },
+
+        increaseCalendarMonth() {
+          this.calendarMonth++;
+          if (this.calendarMonth > 11) {
+            this.calendarMonth = 0;
+            this.calendarYear++;
+          }
+        },
+
+        decreaseCalendarMonth() {
+          this.calendarMonth--;
+          if (this.calendarMonth < 0) {
+            this.calendarMonth = 11;
+            this.calendarYear--;
+          }
+        },
+
+        getCalendarWeeks() {
+          const year = this.calendarYear;
+          const month = this.calendarMonth;
+          const firstDayIndex = new Date(year, month, 1).getDay();
+          const totalDays = new Date(year, month + 1, 0).getDate();
           
-          // Smoother scroll inspector focus
-          setTimeout(() => {
-            const el = document.querySelector('.lg\\:col-span-2');
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 80);
-        },
-
-        // Filters Catalog array dynamically
-        filterCatalog() {
-          this.filteredCourses = this.courses.filter(course => {
-            const matchSearch = this.catalogSearch === '' || 
-              course.name.toLowerCase().includes(this.catalogSearch.toLowerCase()) ||
-              course.description.toLowerCase().includes(this.catalogSearch.toLowerCase());
+          const cells = [];
+          for (let i = 0; i < firstDayIndex; i++) {
+            cells.push({ day: null, dateStr: null, isAvailable: false });
+          }
+          for (let d = 1; d <= totalDays; d++) {
+            const mm = String(month + 1).padStart(2, '0');
+            const dd = String(d).padStart(2, '0');
+            const dateStr = `${year}-${mm}-${dd}`;
             
-            const matchCat = this.catalogCategoryFilter === 'All' || course.category === this.catalogCategoryFilter;
-            const matchDeliv = this.catalogDeliveryFilter === 'All' || course.delivery === this.catalogDeliveryFilter;
-            const matchPilot = !this.pilotOnly || course.pilot;
-
-            return matchSearch && matchCat && matchDeliv && matchPilot;
-          });
+            const matchedSlots = this.getAvailableDatesForCourse(this.wizardSelectedCourse?.id).filter(item => item.date === dateStr);
+            
+            cells.push({
+              day: d,
+              dateStr: dateStr,
+              isAvailable: matchedSlots.length > 0,
+              slots: matchedSlots
+            });
+          }
+          return cells;
         },
 
-        // Form B state launchers
+        selectDateFromCalendar(cell) {
+          if (cell.isAvailable) {
+            this.wizardSelectedDate = cell.dateStr;
+            this.customDateActive = false;
+          } else {
+            this.wizardSelectedDate = '';
+            this.customDateActive = true;
+            this.customDateInputVal = cell.dateStr;
+          }
+        },
+
+        isSelectedDate(cell) {
+          if (this.customDateActive) {
+            return cell.dateStr === this.customDateInputVal;
+          }
+          return cell.dateStr === this.wizardSelectedDate;
+        },
+
+        selectAndAdvanceToStep2(course) {
+          this.wizardSelectedCourse = course;
+          const openDates = this.getAvailableDatesForCourse(course.id);
+          if (openDates.length > 0) {
+            this.wizardSelectedDate = openDates[0].date;
+            this.customDateActive = false;
+            const dParts = openDates[0].date.split('-');
+            this.calendarYear = parseInt(dParts[0]);
+            this.calendarMonth = parseInt(dParts[1]) - 1;
+          } else {
+            this.wizardSelectedDate = '';
+            this.customDateActive = true;
+            this.calendarYear = 2026;
+            this.calendarMonth = 6; // July
+          }
+          setTimeout(() => {
+            this.wizardStep = 2;
+          }, 400); // comfortable tactile click delay
+        },
+
+        filterCatalog() {
+          // kept for compatibility
+        },
+
         openDirectIntake() {
-          this.selectedCourse = this.courses[0];
-          this.selectedDate = '2026-07-22';
-          this.proceedToRegistrationForm();
+          this.resetWizardState();
+          this.wizardSelectedCourse = this.courses[0];
+          this.selectAndAdvanceToStep2(this.courses[0]);
+          this.setView('wizard');
         },
 
         proceedToRegistrationForm() {
-          if (!this.selectedCourse) return;
-          this.intakeForm.courseId = this.selectedCourse.id;
-          this.intakeForm.deliveryType = this.selectedCourse.delivery;
-          this.intakeForm.datePreference = this.selectedDate || '2026-07-22';
-          this.intakeForm.location = this.selectedCourse.delivery === 'ILT' 
-            ? (this.getAvailableDateLocation(this.selectedCourse.id, this.selectedDate) || 'United Academy Regional Training Yard')
-            : 'Self-Paced digital Learning Portal';
-          this.setView('form');
+          // compatibility mapper
         },
 
         computeFormPriceProjection() {
@@ -1369,6 +1838,60 @@
           if (!match) return 0;
           const cost = match.price * this.intakeForm.headcount;
           return Math.round(cost * (1 + this.intakeForm.markupPercent / 100));
+        },
+
+        // Submit handler for wizard
+        submitWizardInquiry() {
+          if (!this.wizardSelectedCourse) return;
+
+          let targetDate = this.customDateActive ? this.customDateInputVal : this.wizardSelectedDate;
+          let targetLocation = this.customDateActive 
+            ? this.customLocationText 
+            : this.getAvailableDateLocation(this.wizardSelectedCourse.id, this.wizardSelectedDate);
+          
+          let listNames = [];
+          if (this.bulkRosterMode) {
+            listNames = this.bulkRosterText.split(/[\n,]+/).map(n => n.trim()).filter(n => n.length > 0);
+          } else {
+            listNames = this.participantsNames.map(n => n?.trim()).filter(n => n && n.length > 0);
+          }
+          if (listNames.length === 0) {
+            listNames = Array.from({ length: this.headcountInput }).map((_, i) => `Operator #${i + 1}`);
+          }
+
+          const randomID = 'req-' + Math.floor(100 + Math.random() * 950);
+          const newRequest = {
+            id: randomID,
+            companyName: this.companyNameInput || 'Contractor Apex Inc',
+            courseId: this.wizardSelectedCourse.id,
+            courseName: this.wizardSelectedCourse.name,
+            coursePrice: this.wizardSelectedCourse.price,
+            deliveryType: this.customDateActive ? 'On-Site Crew' : this.wizardSelectedCourse.delivery,
+            headcount: parseInt(this.headcountInput),
+            datePreference: targetDate || '2026-07-15',
+            location: targetLocation || 'United Academy Training Yard',
+            locationType: this.customDateActive ? 'On-Site' : 'Facility',
+            billingContact: {
+              name: this.billingContactNameVal || 'AP Clerk',
+              email: this.billingContactEmailVal || 'billing@contractor.com',
+              phone: this.billingContactPhoneVal || '(555) 750-1011'
+            },
+            participants: listNames,
+            status: 'Inquiry',
+            markupPercent: this.markupPercent,
+            createdAt: new Date().toISOString(),
+            notes: this.notesInputVal,
+            timeline: [
+              { status: 'Inquiry', timestamp: new Date().toISOString(), message: 'Inquiry locked via step-by-step calendar wizard.' },
+              { status: 'Inquiry', timestamp: new Date().toISOString(), message: 'Automated receipt notice email issued to billing contact.' }
+            ]
+          };
+
+          this.requests.unshift(newRequest);
+          this.syncRequestsToLocalStorage();
+          this.selectedRequest = newRequest;
+          
+          this.setView('success');
         },
 
         // Standard intake form submit handler
